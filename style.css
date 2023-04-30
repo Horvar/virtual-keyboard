@@ -1,0 +1,35 @@
+li::marker {
+  content: '';
+}
+
+.keyboard-row {
+  display: flex;
+  gap: 10px;
+}
+
+.keyboard-btn {
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 40px;
+  height: 40px;
+  
+  box-sizing: border-box;
+  
+  border: 2px solid magenta;
+}
+
+.keyboard-btn--double {
+    width: 100px;
+}
+.keyboard-btn--long {
+    width: 400px;
+}
+
+.keyboard-btn span:nth-child(2) {
+  display: none;
+}
