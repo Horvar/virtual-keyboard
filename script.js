@@ -56,6 +56,8 @@ function createButtons () {
       keyboardRow.appendChild(keyboardBtn)
       
       keyboardBtn.innerHTML = `<span>${currentRow.key[j]}</span><span>${currentRow.keyMod[j]}</span>`
+      keyboardBtn.setAttribute('key', currentRow.key[j])
+      keyboardBtn.setAttribute('keyUpper', currentRow.keyMod[j])
       
       if (currentRow.key[j] === 'Enter') {
         keyboardBtn.classList.add(`${classButton}--double`)
@@ -85,8 +87,10 @@ function highlightPressed () {
           console.log(event.key)
           if (event.key === 'CapsLock') {
             document.querySelectorAll('.keyboard__row')[i].querySelectorAll('.keyboard__btn')[j].classList.toggle('keyboard__btn--pressed')
+            document.querySelectorAll('.keyboard__row')[i].querySelectorAll('.keyboard__btn')[j].click()
           } else {
             document.querySelectorAll('.keyboard__row')[i].querySelectorAll('.keyboard__btn')[j].classList.add('keyboard__btn--pressed')
+            document.querySelectorAll('.keyboard__row')[i].querySelectorAll('.keyboard__btn')[j].click()
           }
         }
       }
@@ -105,6 +109,14 @@ function highlightPressed () {
     }
     
   })
-  
-
 }
+
+
+const btns = document.querySelectorAll('.keyboard__btn')
+btns.forEach((button) => {
+  button.addEventListener('click', () => {
+    document.querySelector('output').innerText += button.getAttribute('key')
+  })
+})
+
+
