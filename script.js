@@ -40,7 +40,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const
       arrRows = keyboard.keyRows,
       numOfRows = arrRows.length,
-      createdContainer = document.createElement('div')
+      createdContainer = document.createElement('div'),
+      output = document.createElement('textarea')
+
+  // create output
+  output.classList.add('output')
+  document.querySelector('body').appendChild(output)
   
   createButtons()
   pressButtons()
@@ -155,8 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function triggerButton () {
     const
-        buttons = document.querySelectorAll(`.${keyboard.classButton}`),
-        output = document.querySelector('textarea')
+        buttons = document.querySelectorAll(`.${keyboard.classButton}`)
 
     let result = ''
     
