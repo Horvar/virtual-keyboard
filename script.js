@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             || buttonCode === 'AltLeft' || buttonCode === 'AltRight' || buttonCode === 'ControlLeft'
             || buttonCode === 'ControlRight' || buttonCode === 'MetaLeft' || buttonCode === 'Space'
             || buttonCode === 'Tab' || buttonCode === 'Enter' || buttonCode === 'NumpadDecimal'
-            || buttonCode === 'Backspace') {
+            || buttonCode === 'Backspace' || buttonCode === 'CapsLock') {
           const cursorPos = output.selectionStart;
 
           switch (buttonCode) {
@@ -187,6 +187,11 @@ document.addEventListener('DOMContentLoaded', () => {
         addSizeClass(['Enter'], `${source.classButton}--double`, currentRow.code[j], createdButton);
         addSizeClass(['Space', 'Backspace', 'ShiftLeft', 'CapsLock'], `${source.classButton}--fill`, currentRow.code[j], createdButton);
         addSizeClass(['Del', 'Tab'], `${source.classButton}--special`, currentRow.code[j], createdButton);
+
+        // highlight caps lock
+        if (keyboard.isCapsPressed && currentRow.code[j] === 'CapsLock') {
+          createdButton.classList.add(`${keyboard.classStatePressed}`);
+        }
       }
     }
 
