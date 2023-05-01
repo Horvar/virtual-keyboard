@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // create output
   output.classList.add('output')
+  output.setAttribute('placeholder', 'Output...')
   document.querySelector('body').appendChild(output)
   
   createButtons()
@@ -185,6 +186,9 @@ document.addEventListener('DOMContentLoaded', function() {
               break
             case 'Tab':
               result = '\t'
+              break
+            case 'Enter':
+              result = '\n'
               break
             case 'Backspace':
               result = ''
