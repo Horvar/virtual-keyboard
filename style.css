@@ -17,6 +17,12 @@
   
   margin: 10vh auto;
 }
+.keyboard--modified .keyboard__btn span:nth-child(1) {
+  display: none;
+}
+.keyboard--modified .keyboard__btn span:nth-child(2) {
+  display: block;
+}
 
 .keyboard__row {
   display: flex;
