@@ -177,8 +177,9 @@ document.addEventListener('DOMContentLoaded', function() {
             || buttonCode === 'AltLeft' || buttonCode === 'AltRight' || buttonCode === 'ControlLeft'
             || buttonCode === 'ControlRight' || buttonCode === 'MetaLeft' || buttonCode === 'Space'
             || buttonCode === 'Tab' || buttonCode === 'Enter' || buttonCode === 'NumpadDecimal'
-            || buttonCode === 'ArrowUp' || buttonCode === 'ArrowLeft' || buttonCode === 'ArrowDown'
-            || buttonCode === 'ArrowRight' || buttonCode === 'Backspace') {
+            || buttonCode === 'Backspace') {
+
+          const cursorPos = output.selectionStart
           
           switch (buttonCode) {
             case 'Space':
@@ -192,11 +193,18 @@ document.addEventListener('DOMContentLoaded', function() {
               break
             case 'Backspace':
               result = ''
-              const cursorPos = output.selectionStart
               if (cursorPos > 0) {
                 output.value = output.value.substring(0, cursorPos - 1) + output.value.substring(cursorPos)
                 output.selectionStart = cursorPos - 1
                 output.selectionEnd = cursorPos - 1
+              }
+              break
+            case 'NumpadDecimal':
+              result = ''
+              if (cursorPos < output.value.length) {
+                output.value = output.value.substring(0, cursorPos) + output.value.substring(cursorPos + 1)
+                output.selectionStart = cursorPos
+                output.selectionEnd = cursorPos
               }
               break
             default:
