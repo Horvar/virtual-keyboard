@@ -73,6 +73,16 @@ document.addEventListener('DOMContentLoaded', () => {
     numOfRows = arrRows.length;
   let createdContainer = document.createElement('div');
   const output = document.createElement('textarea');
+  const description = document.createElement('div');
+  
+  // create description
+  description.classList.add('description');
+  document.querySelector('body').append(description);
+  description.innerHTML = ('' +
+      '<p>Клавиатура создана в ОС Windows</p>' +
+      '<p>Для переключения языка: любой shift + любой alt</p>' +
+      '<p>В качестве Del используется клавиша с NumPad</p>'
+  )
 
   // create output
   output.classList.add('output');

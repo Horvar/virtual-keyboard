@@ -3,6 +3,13 @@
   --buffer: 10px;
 }
 
+.description {
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  text-align: center;
+  margin: 5vh 0;
+}
+
 .output {
   display: block;
   resize: none;
