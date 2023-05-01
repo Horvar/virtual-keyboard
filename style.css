@@ -17,16 +17,13 @@
 
 .keyboard {
   width: min-content;
-  
   background: #333;
   padding: calc(var(--buffer) / 2);
   border: 4px solid #000;
   border-radius: 10px;
-  
   display: flex;
   flex-direction: column;
   gap: 10px;
-  
   margin: 5vh auto;
 }
 .keyboard--modified .keyboard__btn span:nth-child(1) {

@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       ]
     },
-    isLayoutToggled: false,
+    isLayoutToggled: localStorage.getItem('isLayoutToggled') === null ? false : localStorage.getItem('isLayoutToggled'),
     isModified: false,
     isShiftPressed: false,
     isCapsPressed: false,
@@ -156,19 +156,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 } else { // push any other button
                   currentButton.classList.add(source.classStatePressed)
-                  currentButton.click()
+                  
+                  if (output !== document.activeElement) {
+                    currentButton.click()
+                  }
 
                   if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
-                    if (source.isCapsPressed) {
-                      source.isModified = false
-                    } else {
-                      source.isModified = true
-                    }
+                    source.isModified = !source.isCapsPressed
                   }
                 
                   if (event.shiftKey && event.altKey) {
                     source.isLayoutToggled = !source.isLayoutToggled
-                    console.log(source.isLayoutToggled)
+                    localStorage.setItem('isLayoutToggled', source.isLayoutToggled);
                     destroyKeyboard(keyboard)
                     createKeyboard(keyboard)
                   }
@@ -180,11 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   currentButton.classList.remove(source.classStatePressed)
 
                   if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
-                    if (source.isCapsPressed) {
-                      source.isModified = true
-                    } else {
-                      source.isModified = false
-                    }
+                    source.isModified = source.isCapsPressed
                   }
                 }
               }
@@ -221,9 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
             buttonKey = button.getAttribute('key'),
             buttonKeyMod = button.getAttribute('keyMod'),
             buttonCode = button.getAttribute('code')
-
-        console.log(buttonCode)
-
+        
         if (buttonCode === 'ShiftRight' || buttonCode === 'ShiftLeft' || buttonCode === 'ShiftRight'
             || buttonCode === 'AltLeft' || buttonCode === 'AltRight' || buttonCode === 'ControlLeft'
             || buttonCode === 'ControlRight' || buttonCode === 'MetaLeft' || buttonCode === 'Space'
