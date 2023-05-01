@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const keyboard = {
+  let keyboard = {
     keyRows: {
       en: [
         {
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       ]
     },
-    isLayoutToggled: localStorage.getItem('isLayoutToggled') === null ? false : localStorage.getItem('isLayoutToggled'),
+    layout: localStorage.getItem('layout') === null ? 'en' : localStorage.getItem('layout'),
     isModified: false,
     isShiftPressed: false,
     isCapsPressed: false,
@@ -66,8 +66,8 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   keyboard.classStatePressed = `${keyboard.classButton}--pressed`
   keyboard.classStateModified = `${keyboard.classContainer}--modified`
-
-  let arrRows = keyboard.keyRows.en
+  
+  let arrRows = keyboard.layout ? keyboard.keyRows.ru : keyboard.keyRows.en
 
   let
       numOfRows = arrRows.length,
@@ -93,8 +93,8 @@ document.addEventListener('DOMContentLoaded', function () {
     createdContainer = document.createElement('div')
     createdContainer.classList.add(source.classContainer)
     document.querySelector('body').append(createdContainer)
-
-    arrRows = source.isLayoutToggled ? source.keyRows.ru : source.keyRows.en
+    
+    arrRows = source.layout === 'ru' ? source.keyRows.ru : source.keyRows.en
     
     for (let i = 0; i < numOfRows; i++) { // create rows cycle
       const
@@ -166,10 +166,11 @@ document.addEventListener('DOMContentLoaded', function () {
                   }
                 
                   if (event.shiftKey && event.altKey) {
-                    source.isLayoutToggled = !source.isLayoutToggled
-                    localStorage.setItem('isLayoutToggled', source.isLayoutToggled);
-                    destroyKeyboard(keyboard)
-                    createKeyboard(keyboard)
+                    source.layout = source.layout === 'en' ? 'ru' : 'en'
+                    localStorage.removeItem('layout')
+                    localStorage.setItem('layout', source.layout)
+                    destroyKeyboard(source)
+                    createKeyboard(source)
                   }
                 }
               }
